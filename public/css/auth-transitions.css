@@ -1,0 +1,146 @@
+@view-transition {
+    navigation: auto;
+}
+
+:root {
+    --form-w: 60fr;
+    --info-w: 40fr;
+    --vt-duration: 650ms;
+    --vt-easing: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+html:has(body.auth-page),
+body.auth-page {
+    background-color: #99111b;
+}
+
+.auth-card {
+    view-transition-name: auth-card;
+    isolation: isolate;
+    clip-path: inset(0 round 28px);
+}
+
+.auth-card .info-panel {
+    view-transition-name: info-panel;
+}
+
+.auth-card .form-panel {
+    view-transition-name: form-panel;
+}
+
+.auth-card .form-panel,
+.auth-card .info-panel {
+    box-shadow:
+        0 0 18px 2px rgba(15, 23, 42, 0.16),
+        0 4px 12px rgba(15, 23, 42, 0.10);
+}
+
+.auth-card .bg-shape {
+    view-transition-name: none;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    opacity: 0;
+}
+
+::view-transition-new(root) {
+    opacity: 1;
+}
+
+::view-transition-group(info-panel),
+::view-transition-group(form-panel) {
+    animation-duration: var(--vt-duration, 650ms);
+    animation-timing-function: var(--vt-easing, cubic-bezier(0.65, 0, 0.35, 1));
+}
+
+::view-transition-old(auth-card),
+::view-transition-new(auth-card),
+::view-transition-old(info-panel),
+::view-transition-new(info-panel),
+::view-transition-old(form-panel),
+::view-transition-new(form-panel) {
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(auth-card),
+::view-transition-new(auth-card) {
+    animation: none;
+}
+
+::view-transition-group(auth-card),
+::view-transition-image-pair(auth-card) {
+    animation: none;
+}
+
+::view-transition-old(info-panel),
+::view-transition-old(form-panel) {
+    animation: vt-panel-old var(--vt-duration, 650ms) var(--vt-easing, cubic-bezier(0.65, 0, 0.35, 1)) both;
+}
+
+::view-transition-new(info-panel),
+::view-transition-new(form-panel) {
+    animation: vt-panel-new var(--vt-duration, 650ms) var(--vt-easing, cubic-bezier(0.65, 0, 0.35, 1)) both;
+}
+
+@keyframes vt-panel-old {
+    0%, 40% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes vt-panel-new {
+    0%, 40% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+::view-transition-group(auth-card),
+::view-transition-image-pair(auth-card),
+::view-transition-image-pair(info-panel),
+::view-transition-image-pair(form-panel) {
+    border-radius: 28px;
+    overflow: hidden;
+}
+
+@media (max-width: 767px) {
+    .auth-card {
+        clip-path: inset(0 round 20px);
+    }
+
+    .auth-card .info-panel,
+    .auth-card .form-panel {
+        view-transition-name: none;
+        grid-column: auto;
+    }
+
+    ::view-transition-old(auth-card),
+    ::view-transition-new(auth-card) {
+        animation: auth-card-fade var(--vt-duration, 650ms) ease both;
+    }
+
+    ::view-transition-group(auth-card),
+    ::view-transition-image-pair(auth-card) {
+        border-radius: 20px;
+    }
+}
+
+@keyframes auth-card-fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --vt-duration: 1ms;
+    }
+
+    ::view-transition-group(info-panel),
+    ::view-transition-group(form-panel),
+    ::view-transition-group(auth-card) {
+        animation-duration: 1ms;
+    }
+}

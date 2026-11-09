@@ -1,0 +1,976 @@
+
+
+<?php $__env->startSection('content'); ?>
+<div class="login-wrapper">
+    <div class="login-container" style="max-width: 1140px;">
+
+        <!-- Logo/Brand (Di Luar Card, Atas) -->
+        <div class="brand-top-header">
+            <div class="brand-logo-box">
+                <?php if(file_exists(public_path('images/telkom-property-logo.png'))): ?>
+                    <img src="<?php echo e(asset('images/telkom-property-logo.png')); ?>" alt="Telkom Property">
+                <?php elseif(file_exists(public_path('images/telkom-property-logo.png.png'))): ?>
+                    <img src="<?php echo e(asset('images/telkom-property-logo.png.png')); ?>" alt="Telkom Property">
+                <?php elseif(file_exists(public_path('images/telkom-property-logo.svg'))): ?>
+                    <img src="<?php echo e(asset('images/telkom-property-logo.svg')); ?>" alt="Telkom Property">
+                <?php else: ?>
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 12.5 12 4l9 8.5"></path>
+                        <path d="M5 10.5V20h14v-9.5"></path>
+                    </svg>
+                <?php endif; ?>
+            </div>
+            <h1 class="brand-top-title">Monitoring Dokumen</h1>
+            <p class="brand-top-sub">Regional III Telkom Property</p>
+        </div>
+
+        <!-- Split Card (Merah Tone) -->
+        <div id="auth-card" class="split-card auth-card">
+            
+            <!-- Sisi Kiri: Panel Merah (Info Sudal Punya Akun) -->
+            <div class="info-panel">
+                <!-- Background Geometris -->
+                <div class="bg-shape shape-diamond-top"></div>
+                <div class="bg-shape shape-diamond-bottom"></div>
+                <div class="bg-shape shape-circle"></div>
+
+                <div class="info-body">
+                    <div class="info-top">
+                        <h2 class="info-heading">Sudah punya akun?</h2>
+                        <p class="info-desc">
+                            Silakan masuk dengan akun Anda untuk mulai mengelola dan memantau dokumen di Regional III Telkom Property.
+                        </p>
+                    </div>
+
+                    <div class="info-bottom">
+                        <a href="<?php echo e(route('login')); ?>" class="outline-pill-btn">
+                            Masuk di sini
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sisi Kanan: Form Registrasi -->
+            <div class="form-panel">
+                <div class="form-top">
+                    <h2 class="form-heading">Buat Akun Baru</h2>
+                    <p class="form-subheading">Isi data di bawah untuk mendaftar</p>
+
+                    <?php if(session('status')): ?>
+                        <div class="notice" style="margin-bottom: 20px; background: rgba(221, 246, 236, 0.85); border-color: rgba(191, 231, 214, 0.8); backdrop-filter: blur(10px); padding: 12px 16px; border-radius: 12px; font-size: 16px; color: #065f46;"><?php echo e(session('status')); ?></div>
+                    <?php endif; ?>
+
+                    <form method="POST" action="<?php echo e(route('register')); ?>" class="register-form" novalidate>
+                        <?php echo csrf_field(); ?>
+
+                        <div class="form-grid">
+                            <!-- Nama Lengkap -->
+                            <div class="form-group field-name">
+                                <label for="name" class="input-label">Nama Lengkap</label>
+                                <div class="field-control <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> has-error <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                    <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    <input id="name" type="text" name="name" value="<?php echo e(old('name')); ?>" required autocomplete="name"
+                                        class="custom-input <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-danger <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                        placeholder="Nama lengkap">
+                                </div>
+                                <?php $__errorArgs = ['name'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="text-danger-msg"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group span-2 field-email">
+                                <label for="email" class="input-label">Email</label>
+                                <div class="field-control <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> has-error <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                    <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                    </svg>
+                                    <input id="email" type="email" name="email" value="<?php echo e(old('email')); ?>" required autocomplete="email"
+                                        class="custom-input <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-danger <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                        placeholder="nama@domain.com">
+                                </div>
+                                <?php $__errorArgs = ['email'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="text-danger-msg"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <!-- Unit -->
+                            <div class="form-group field-unit">
+                                <label for="unit_id" class="input-label">Unit</label>
+                                <div class="unit-select <?php $__errorArgs = ['unit_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> has-error <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                    <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="z-index: 2;">
+                                        <path d="M3 12.5 12 4l9 8.5"></path>
+                                        <path d="M5 10.5V20h14v-9.5"></path>
+                                    </svg>
+                                    <input type="hidden" id="unit_id" name="unit_id" value="<?php echo e(old('unit_id')); ?>">
+                                    <button type="button" class="unit-select-trigger <?php $__errorArgs = ['unit_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-danger <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" aria-haspopup="listbox" aria-expanded="false">
+                                        <span id="unitLabel">Pilih unit Anda</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M6 9l6 6 6-6"></path>
+                                        </svg>
+                                    </button>
+                                    <div class="unit-select-options" role="listbox">
+                                        <?php $__currentLoopData = $units; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $unit): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <button type="button" role="option" data-value="<?php echo e($unit->id); ?>"><?php echo e($unit->name); ?></button>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </div>
+                                </div>
+                                <?php $__errorArgs = ['unit_id'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="text-danger-msg"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="form-group field-password">
+                                <label for="password" class="input-label">Password</label>
+                                <div class="field-control <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> has-error <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>">
+                                    <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                    <input id="password" type="password" name="password" required autocomplete="new-password"
+                                        class="custom-input <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-danger <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                        placeholder="Minimal 8 karakter">
+                                    <button type="button" id="togglePassword" aria-label="Tampilkan/Sembunyikan password" class="password-toggle">
+                                        <svg id="eyeOpen" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                        <svg id="eyeClosed" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <?php $__errorArgs = ['password'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="text-danger-msg"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+
+                            <!-- Konfirmasi Password -->
+                            <div class="form-group field-confirm-password">
+                                <label for="password_confirmation" class="input-label">Konfirmasi Password</label>
+                                <div class="field-control">
+                                    <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                    <input id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password" disabled
+                                        class="custom-input"
+                                        placeholder="Ulangi password">
+                                    <button type="button" id="togglePasswordConfirm" aria-label="Tampilkan/Sembunyikan password" class="password-toggle" disabled>
+                                        <svg id="eyeOpenConfirm" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;">
+                                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                            <circle cx="12" cy="12" r="3"></circle>
+                                        </svg>
+                                        <svg id="eyeClosedConfirm" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                                            <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                            <line x1="1" y1="1" x2="23" y2="23"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <?php $__errorArgs = ['password_confirmation'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                    <span class="text-danger-msg"><?php echo e($message); ?></span>
+                                <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            </div>
+                        </div>
+
+                        <!-- Button Daftar -->
+                        <div class="form-bottom">
+                            <button class="submit-btn" type="submit">
+                                <span id="btnText">Daftar</span>
+                                <span id="btnLoading" style="display: none;">
+                                    <svg class="animate-spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 8px;">
+                                        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+                                        <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+                                    </svg>
+                                    Memproses...
+                                </span>
+                            </button>
+
+                            <!-- Mobile View Login Link -->
+                            <div class="mobile-register-link">
+                                Sudah punya akun? <a href="<?php echo e(route('login')); ?>" class="register-anchor">Masuk di sini</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Teks -->
+        <div class="card-footer-text">
+            <p>&copy; <?php echo e(date('Y')); ?> Telkom Property Regional III</p>
+            <p>Sistem Monitoring Dokumen v1.0</p>
+        </div>
+
+    </div>
+</div>
+
+<style id="auth-page-style">
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    .animate-spin { animation: spin 1s linear infinite; }
+
+    .login-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 20px;
+        box-sizing: border-box;
+    }
+
+    body.auth-page {
+        background:
+            linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),
+            url('<?php echo e(asset('images/bg login regis.png')); ?>') center / cover no-repeat fixed;
+    }
+
+    .auth-page .content,
+    .auth-page .container {
+        width: 100%;
+        max-width: none;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 1140px;
+        margin: 0 auto;
+    }
+
+    /* Top Brand Header (Di Luar Card) */
+    .brand-top-header {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .brand-logo-box {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 76px;
+        height: 76px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #ffffff, #fff9d9);
+        border: 1px solid #f1df80;
+        box-shadow: 0 12px 32px rgba(225, 29, 42, 0.14);
+        margin-bottom: 14px;
+    }
+
+    .brand-logo-box img {
+        width: 66px;
+        height: 66px;
+        object-fit: contain;
+    }
+
+    .brand-top-title {
+        margin: 0 0 4px;
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text, #1e293b);
+        letter-spacing: -0.02em;
+    }
+
+    .brand-top-sub {
+        margin: 0;
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--primary, #E11D2A);
+    }
+
+    /* Split Card Container */
+    .split-card {
+        display: grid;
+        grid-template-columns: minmax(0, var(--info-w)) minmax(0, var(--form-w));
+        grid-template-rows: minmax(0, 1fr);
+        background: #ffffff;
+        border-radius: 28px;
+        box-shadow: 
+            0 20px 50px rgba(225, 29, 42, 0.08), 
+            0 8px 24px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        width: 1140px;
+        max-width: 100%;
+        height: 620px;
+        border: 1px solid rgba(214, 225, 236, 0.7);
+        position: relative;
+        min-width: 0;
+        min-height: 0;
+    }
+
+    /* Left Panel: Info Panel (Sudah punya akun) */
+    .info-panel {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #E11D2A 0%, #C81E2B 50%, #A5131E 100%);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 44px 48px;
+        color: #ffffff;
+        overflow: hidden;
+        box-sizing: border-box;
+        min-width: 0;
+        min-height: 0;
+        will-change: transform;
+    }
+
+    /* Background Geometris */
+    .bg-shape {
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .shape-diamond-top {
+        width: 140px;
+        height: 140px;
+        background: rgba(255, 255, 255, 0.08);
+        transform: rotate(45deg);
+        border-radius: 24px;
+        top: -30px;
+        right: -30px;
+    }
+
+    .shape-diamond-bottom {
+        width: 160px;
+        height: 160px;
+        background: rgba(255, 255, 255, 0.08);
+        transform: rotate(45deg);
+        border-radius: 28px;
+        bottom: -40px;
+        left: -40px;
+    }
+
+    .shape-circle {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
+        border-radius: 50%;
+        bottom: 5%;
+        right: -10%;
+    }
+
+    .info-body {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        max-width: 360px;
+    }
+
+    .info-top {
+        margin-top: 0;
+        margin-bottom: 28px;
+    }
+
+    .info-heading {
+        margin: 0 0 16px;
+        font-size: 32px;
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+        line-height: 1.25;
+    }
+
+    .info-desc {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.92);
+        font-weight: 500;
+    }
+
+    .info-bottom {
+        margin-top: 0;
+    }
+
+    .outline-pill-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 36px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+        border: 2px solid #ffffff;
+        border-radius: 36px;
+        text-decoration: none;
+        transition: all .25s ease;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+        box-sizing: border-box;
+    }
+
+    .outline-pill-btn:hover {
+        background: #ffffff;
+        color: #E11D2A;
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+        transform: translateY(-1px);
+    }
+
+    /* Right Panel: Form Register */
+    .form-panel {
+        flex: 1;
+        width: 100%;
+        height: 100%;
+        padding: 44px 48px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background: #ffffff;
+        position: relative;
+        z-index: 2;
+        box-sizing: border-box;
+        min-width: 0;
+        min-height: 0;
+        will-change: transform;
+    }
+
+    .form-top {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-heading {
+        margin: 0 0 6px;
+        font-size: 30px;
+        font-weight: 800;
+        color: #1e293b;
+        letter-spacing: -0.02em;
+    }
+
+    .form-subheading {
+        margin: 0 0 24px;
+        font-size: 16px;
+        color: #64748b;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px 20px;
+    }
+
+    .form-group {
+        position: relative;
+        margin-bottom: 0;
+        min-height: 102px;
+    }
+
+    .field-confirm-password {
+        min-height: 124px;
+    }
+
+    .form-group.span-2 {
+        grid-column: span 2;
+    }
+
+    .field-name { order: 1; }
+    .field-unit { order: 2; }
+    .field-email { order: 3; }
+    .field-password { order: 4; }
+    .field-confirm-password { order: 5; }
+
+    .input-label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    .field-control {
+        position: relative;
+    }
+
+    .field-icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        color: #8E8E93;
+        pointer-events: none;
+        transition: color .2s ease;
+    }
+
+    .custom-input {
+        width: 100%;
+        padding: 14px 18px 14px 50px;
+        border: 1px solid rgba(214, 225, 236, 0.9);
+        border-radius: 14px;
+        font-size: 17px;
+        background: #f8fafc;
+        color: #1e293b;
+        transition: all .2s ease;
+        box-sizing: border-box;
+    }
+
+    .custom-input:focus {
+        outline: none;
+        border-color: #E11D2A !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 4px rgba(225, 29, 42, 0.12) !important;
+    }
+
+    .field-control:focus-within .field-icon,
+    .unit-select:focus-within > .field-icon {
+        color: #E11D2A;
+    }
+
+    .password-toggle {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        padding: 4px;
+        cursor: pointer;
+        color: #8E8E93;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: color .2s;
+    }
+
+    .password-toggle:hover {
+        color: #E11D2A;
+    }
+
+    .password-toggle:disabled {
+        cursor: not-allowed;
+        opacity: 0.45;
+    }
+
+    .custom-input:disabled {
+        cursor: not-allowed;
+        background: #eef2f7;
+        color: #94a3b8;
+    }
+
+    .form-group > .text-danger-msg {
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        margin-top: 0;
+    }
+
+    .field-password > .text-danger-msg,
+    .field-confirm-password > .text-danger-msg {
+        top: 82px;
+        bottom: auto;
+    }
+
+    /* Unit Custom Select */
+    .unit-select {
+        position: relative;
+    }
+
+    .unit-select-trigger {
+        width: 100%;
+        min-height: 52px;
+        padding: 14px 44px 14px 50px;
+        border: 1px solid rgba(214, 225, 236, 0.9);
+        border-radius: 14px;
+        background: #f8fafc;
+        color: #1e293b;
+        font: inherit;
+        font-size: 17px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all .2s ease;
+        box-sizing: border-box;
+    }
+
+    .unit-select-trigger > svg:last-child {
+        width: 18px;
+        height: 18px;
+        color: #8E8E93;
+        flex-shrink: 0;
+    }
+
+    .unit-select-trigger:focus {
+        outline: none;
+        border-color: #E11D2A !important;
+        background: #ffffff !important;
+        box-shadow: 0 0 0 4px rgba(225, 29, 42, 0.12) !important;
+    }
+
+    .unit-select-options {
+        position: absolute;
+        z-index: 10;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        display: none;
+        max-height: 220px;
+        overflow-y: auto;
+        padding: 6px;
+        border: 1px solid rgba(214, 225, 236, 0.9);
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 12px 28px rgba(10, 40, 74, 0.14);
+    }
+
+    .unit-select.is-open .unit-select-options { display: grid; gap: 2px; }
+
+    .unit-select-options button {
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 14px;
+        background: transparent;
+        color: #1e293b;
+        font: inherit;
+        font-size: 17px;
+        text-align: left;
+        cursor: pointer;
+        transition: background .15s;
+    }
+
+    .unit-select-options button:hover,
+    .unit-select-options button.is-selected {
+        background: #fff1f2;
+        color: #E11D2A;
+    }
+
+    .form-bottom {
+        margin-top: 24px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 15px 32px;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+        background: linear-gradient(135deg, #E11D2A 0%, #B91C1C 100%);
+        border: none;
+        border-radius: 36px;
+        cursor: pointer;
+        box-shadow: 0 10px 24px rgba(225, 29, 42, 0.28);
+        transition: all .25s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .form-panel .submit-btn {
+        position: relative;
+        top: -20px;
+    }
+
+    .submit-btn:hover {
+        background: linear-gradient(135deg, #f32331 0%, #99111b 100%);
+        box-shadow: 0 14px 28px rgba(225, 29, 42, 0.38);
+        transform: translateY(-1px);
+    }
+
+    .submit-btn:active {
+        transform: translateY(0);
+    }
+
+    .mobile-register-link {
+        display: none;
+        margin-top: 18px;
+        text-align: center;
+        font-size: 16px;
+        color: #64748b;
+    }
+
+    .register-anchor {
+        color: #E11D2A;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .register-anchor:hover {
+        text-decoration: underline;
+    }
+
+    .text-danger-msg {
+        display: block;
+        margin-top: 5px;
+        font-size: 13.5px;
+        color: #ef4444;
+    }
+
+    .border-danger {
+        border-color: #ef4444 !important;
+    }
+
+    .card-footer-text {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 15.5px;
+        color: var(--muted, #8E8E93);
+        opacity: 0.8;
+    }
+
+    .card-footer-text p {
+        margin: 2px 0;
+    }
+
+    /* Responsive untuk Tablet & Mobile */
+    @media (max-width: 767px) {
+        .split-card {
+            grid-template-columns: 1fr;
+            border-radius: 20px;
+            height: auto;
+        }
+
+        .info-panel, .form-panel {
+            padding: 32px 24px;
+        }
+
+        .info-panel, .form-panel {
+            width: 100%;
+            flex: none;
+            grid-column: auto;
+        }
+
+        .info-panel {
+            order: 2;
+        }
+
+        .form-panel {
+            order: 1;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group.span-2 {
+            grid-column: span 1;
+        }
+
+        .info-heading {
+            font-size: 26px;
+        }
+
+        .info-desc {
+            font-size: 16px;
+        }
+
+        .form-heading {
+            font-size: 26px;
+        }
+
+        .mobile-register-link {
+            display: block;
+        }
+    }
+
+</style>
+
+<script>
+    function initAuthPage() {
+        const bindPasswordToggle = (buttonId, inputId, openId, closedId) => {
+            const button = document.getElementById(buttonId);
+            const input = document.getElementById(inputId);
+            const openIcon = document.getElementById(openId);
+            const closedIcon = document.getElementById(closedId);
+
+            if (!button || !input || button.dataset.bound) return;
+            button.dataset.bound = 'true';
+            button.addEventListener('click', function() {
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                if (openIcon) openIcon.style.display = isPassword ? 'none' : 'block';
+                if (closedIcon) closedIcon.style.display = isPassword ? 'block' : 'none';
+            });
+        };
+
+        bindPasswordToggle('togglePassword', 'password', 'eyeOpen', 'eyeClosed');
+        bindPasswordToggle('togglePasswordConfirm', 'password_confirmation', 'eyeOpenConfirm', 'eyeClosedConfirm');
+
+        const passwordInput = document.getElementById('password');
+        const passwordConfirmInput = document.getElementById('password_confirmation');
+        const passwordConfirmToggle = document.getElementById('togglePasswordConfirm');
+        const passwordConfirmHint = document.getElementById('passwordConfirmHint');
+
+        if (passwordInput && passwordConfirmInput && !passwordInput.dataset.confirmBound) {
+            passwordInput.dataset.confirmBound = 'true';
+
+            const syncPasswordConfirmation = () => {
+                const hasPassword = passwordInput.value.length > 0;
+                passwordConfirmInput.disabled = !hasPassword;
+                if (passwordConfirmToggle) passwordConfirmToggle.disabled = !hasPassword;
+                if (passwordConfirmHint) passwordConfirmHint.hidden = hasPassword;
+
+                if (!hasPassword) passwordConfirmInput.value = '';
+            };
+
+            passwordInput.addEventListener('input', syncPasswordConfirmation);
+            syncPasswordConfirmation();
+        }
+
+        const form = document.querySelector('form');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+        const submitBtn = document.querySelector('.submit-btn');
+
+        if (form && !form.dataset.bound) {
+            form.dataset.bound = 'true';
+            form.addEventListener('submit', function() {
+                if (submitBtn) submitBtn.disabled = true;
+                if (btnText) btnText.style.display = 'none';
+                if (btnLoading) btnLoading.style.display = 'inline-flex';
+            });
+        }
+
+        const unitSelect = document.querySelector('.unit-select');
+        const unitTrigger = unitSelect?.querySelector('.unit-select-trigger');
+        const unitInput = document.getElementById('unit_id');
+        const unitLabel = document.getElementById('unitLabel');
+        const unitOptions = unitSelect?.querySelectorAll('[role="option"]') ?? [];
+
+        if (unitSelect && unitTrigger && unitInput && unitLabel && !unitSelect.dataset.bound) {
+            unitSelect.dataset.bound = 'true';
+            unitOptions.forEach(function(option) {
+                if (option.dataset.value === unitInput.value) {
+                    unitLabel.textContent = option.textContent.trim();
+                    option.classList.add('is-selected');
+                }
+
+                option.addEventListener('click', function() {
+                    unitInput.value = option.dataset.value;
+                    unitLabel.textContent = option.textContent.trim();
+                    unitOptions.forEach(item => item.classList.remove('is-selected'));
+                    option.classList.add('is-selected');
+                    unitSelect.classList.remove('is-open');
+                    unitTrigger.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            unitTrigger.addEventListener('click', function() {
+                const isOpen = unitSelect.classList.toggle('is-open');
+                unitTrigger.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!unitSelect.contains(event.target)) {
+                    unitSelect.classList.remove('is-open');
+                    unitTrigger.setAttribute('aria-expanded', 'false');
+                }
+            });
+        }
+
+    }
+
+    document.addEventListener('DOMContentLoaded', initAuthPage);
+</script>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.app', ['title' => 'Registrasi', 'showSidebar' => false], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Projects\monitoring-dokumen\resources\views\auth\register.blade.php ENDPATH**/ ?>
